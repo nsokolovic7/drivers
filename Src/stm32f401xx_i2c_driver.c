@@ -243,4 +243,45 @@ void I2C_MasterSendData(I2C_Handle_t *pI2CHandle, uint8_t *pTxBuffer, uint8_t Le
 	I2C_GenerateStopCondition(pI2CHandle->pI2Cx);
 }
 
+void I2C_MasterRecieveData(I2C_Handle_t *pI2CHandle, uint8_t *pRxBuffer, uint8_t Len, uint8_t SlaveAddr)
+{
+	//Generate the start condition
 
+	//confirm that start generation is completed by checking the SB flag in the SRI
+	//NOTE: until SB is cleared, SCL will be stretched
+
+	//send the address of the slave with r/nw bit set to R(1) (total 8 bits)
+
+	//wait until address phase is completed by checking ADDR flag in SR1
+
+	//procedure to read only 1 byte from slave
+	if (Len == 1)
+	{
+		//Disable Acking
+
+		//clear the ADDR flag
+
+		//wait until RXNE becomes 1
+
+		//generate stop condition
+
+		//read data into buffer
+
+		return;
+	}
+	//procedure to read more than byte from slave
+	if (Len == 1)
+		{
+			//Disable Acking
+
+			//clear the ADDR flag
+
+			//wait until RXNE becomes 1
+
+			//generate stop condition
+
+			//read data into buffer
+
+			return;
+		}
+}
