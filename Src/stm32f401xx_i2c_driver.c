@@ -285,8 +285,6 @@ void I2C_MasterRecieveData(I2C_Handle_t *pI2CHandle, uint8_t *pRxBuffer, uint8_t
 		//Disable Acking
 		I2C_ManageAcking(pI2CHandle->pI2Cx, I2C_ACK_DISABLE);
 
-		//generate stop condition
-		I2C_GenerateStopCondition(pI2CHandle->pI2Cx);
 
 		//clear the ADDR flag
 		I2C_ClearADDRFlag(pI2CHandle->pI2Cx);
@@ -298,8 +296,6 @@ void I2C_MasterRecieveData(I2C_Handle_t *pI2CHandle, uint8_t *pRxBuffer, uint8_t
 
 		//read data into buffer
 		*pRxBuffer = pI2CHandle->pI2Cx->DR;
-
-		return;
 	}
 	//procedure to read more than byte from slave
 	if (Len > 1)
