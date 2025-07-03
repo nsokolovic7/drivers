@@ -228,7 +228,7 @@ void I2C_Init(I2C_Handle_t *pI2CHandle)
 void I2C_DeInit(I2C_RegDef_t *pI2Cx);
 
 
-void I2C_MasterSendData(I2C_Handle_t *pI2CHandle, uint8_t *pTxBuffer, uint8_t Len, uint8_t SlaveAddr)
+void I2C_MasterSendData(I2C_Handle_t *pI2CHandle, uint8_t *pTxBuffer, uint8_t Len, uint8_t SlaveAddr, uint8_t Sr)
 {
 	//generate the start condition
 	I2C_GenerateStartCondition(pI2CHandle->pI2Cx);
@@ -261,10 +261,14 @@ void I2C_MasterSendData(I2C_Handle_t *pI2CHandle, uint8_t *pTxBuffer, uint8_t Le
 	while(!I2CGetFlagStatus(pI2CHandle->pI2Cx, I2C_BTF_FLAG));
 
 	//Send the STOP condition
-	I2C_GenerateStopCondition(pI2CHandle->pI2Cx);
+	if(Sr == I2C_NO_SR)
+	{
+		I2C_GenerateStopCondition(pI2CHandle->pI2Cx);
+	}
+
 }
 
-void I2C_MasterRecieveData(I2C_Handle_t *pI2CHandle, uint8_t *pRxBuffer, uint8_t Len, uint8_t SlaveAddr)
+void I2C_MasterRecieveData(I2C_Handle_t *pI2CHandle, uint8_t *pRxBuffer, uint8_t Len, uint8_t SlaveAddr, uint8_t Sr)
 {
 	//Generate the start condition
 	I2C_GenerateStartCondition(pI2CHandle->pI2Cx);
@@ -292,6 +296,12 @@ void I2C_MasterRecieveData(I2C_Handle_t *pI2CHandle, uint8_t *pRxBuffer, uint8_t
 		//wait until RXNE becomes 1
 		while(!I2CGetFlagStatus(pI2CHandle->pI2Cx, I2C_RXNE_FLAG)); //wait until RXNE is set
 
+		//Generate STOP condition
+		if(Sr == I2C_NO_SR)
+			{
+				I2C_GenerateStopCondition(pI2CHandle->pI2Cx);
+			}
+
 
 
 		//read data into buffer
@@ -317,7 +327,10 @@ void I2C_MasterRecieveData(I2C_Handle_t *pI2CHandle, uint8_t *pRxBuffer, uint8_t
 					I2C_ManageAcking(pI2CHandle->pI2Cx, I2C_ACK_DISABLE);
 
 					//generate stop condition
-					I2C_GenerateStopCondition(pI2CHandle->pI2Cx);
+					if(Sr == I2C_NO_SR)
+						{
+							I2C_GenerateStopCondition(pI2CHandle->pI2Cx);
+						}
 
 				}
 

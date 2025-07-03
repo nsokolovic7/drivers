@@ -54,6 +54,9 @@ typedef struct{
 #define I2C_PECERR_FLAG						(1 << I2C_SR1_PECERR)
 #define I2C_TIMEOUT_FLAG					(1 << I2C_SR1_TIMEOUT)
 
+#define I2C_NO_SR 							RESET
+#define I2C_SR 								SET
+
 /*
  * 				We define the APIs supported by this driver
  * */
@@ -76,8 +79,8 @@ void I2C_ManageAcking(I2C_RegDef_t *pI2Cx, uint8_t EnOrDi);
 
 void I2C_ApplicationEventCallback(I2C_Handle_t *pI2CHandle, uint8_t AppEv);
 
-void I2C_MasterSendData(I2C_Handle_t *pI2CHandle, uint8_t *pTxBuffer, uint8_t Len, uint8_t SlaveAddr);
-void I2C_MasterRecieveData(I2C_Handle_t *pI2CHandle, uint8_t *pRxBuffer, uint8_t Len, uint8_t SlaveAddr);
+void I2C_MasterSendData(I2C_Handle_t *pI2CHandle, uint8_t *pTxBuffer, uint8_t Len, uint8_t SlaveAddr, uint8_t Sr);
+void I2C_MasterRecieveData(I2C_Handle_t *pI2CHandle, uint8_t *pRxBuffer, uint8_t Len, uint8_t SlaveAddr, uint8_t Sr);
 
 
 
