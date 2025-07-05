@@ -435,7 +435,7 @@ typedef struct
 #define I2C_SR1_ADD10			3
 #define I2C_SR1_STOPF			4
 #define I2C_SR1_RXNE			6
-#define I2C_SR1_TXNE			7
+#define I2C_SR1_TXE			7
 #define I2C_SR1_BERR			8
 #define I2C_SR1_ARLO			9
 #define I2C_SR1_AF				10
