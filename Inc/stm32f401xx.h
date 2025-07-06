@@ -201,6 +201,20 @@ typedef struct
 
 }I2C_RegDef_t;
 
+/************************** USART register definition structure ***********************************************/
+typedef struct
+{
+	__vo uint32_t SR;				//status register												Address offset: 0x00
+	__vo uint32_t DR;				//data register												Address offset: 0x04
+	__vo uint32_t BRR;				//baud rate register										Address offset: 0x08
+	__vo uint32_t CR1;				//control register 1 										Address offset: 0x0C
+	__vo uint32_t CR2;				//control register 2										Address offset: 0x10
+	__vo uint32_t CR3;				//control register 3									    Address offset: 0x14
+	__vo uint32_t GTPR;				//guard time and prescaler									Address offset: 0x18
+
+
+}USART_RegDef_t;
+
 
 
 
@@ -229,6 +243,11 @@ typedef struct
 #define DRV_I2C1							((I2C_RegDef_t*) DRV_I2C1_BASEADDR)
 #define DRV_I2C2							((I2C_RegDef_t*) DRV_I2C2_BASEADDR)
 #define DRV_I2C3							((I2C_RegDef_t*) DRV_I2C3_BASEADDR)
+
+//Defining USART
+#define DRV_USART1							((USART_RegDef_t*) DRV_USART1_BASEADDR)
+#define DRV_USART2							((USART_RegDef_t*) DRV_USART2_BASEADDR)
+#define DRV_USART6							((USART_RegDef_t*) DRV_USART6_BASEADDR)
 
 /***************************** Defining peripheral clock enable macros *********************************/
 
@@ -435,7 +454,7 @@ typedef struct
 #define I2C_SR1_ADD10			3
 #define I2C_SR1_STOPF			4
 #define I2C_SR1_RXNE			6
-#define I2C_SR1_TXE			7
+#define I2C_SR1_TXE				7
 #define I2C_SR1_BERR			8
 #define I2C_SR1_ARLO			9
 #define I2C_SR1_AF				10
@@ -459,14 +478,77 @@ typedef struct
 #define I2C_CCR_DUTY			14
 #define I2C_CCR_FS				15
 
+/******************************************************************************
+ * 					Bit position definitions of USART peripheral
+ ******************************************************************************/
 
+//defining macros for SR
+#define USART_SR_PE 			0
+#define USART_SR_FE 			1
+#define USART_SR_NF 			2
+#define USART_SR_ORE 			3
+#define USART_SR_IDLE 			4
+#define USART_SR_RXNE 			5
+#define USART_SR_TC 			6
+#define USART_SR_TXE 			7
+#define USART_SR_LBD 			8
+#define USART_SR_CTS 			9
 
+//defining BRR
+#define USART_BRR_DIV_Fraction 	0
+#define USART_BRR_DIV_Mantissa 	4
 
+//defining CR1 macros
+#define USART_CR1_SBK 			0
+#define USART_CR1_RWU 			1
+#define USART_CR1_RE 			2
+#define USART_CR1_TE 			3
+#define USART_CR1_IDLEIE 		4
+#define USART_CR1_RXNEIE 		5
+#define USART_CR1_TCIE 			6
+#define USART_CR1_TXEIE 		7
+#define USART_CR1_PEIE 			8
+#define USART_CR1_PS 			9
+#define USART_CR1_PCE 			10
+#define USART_CR1_WAKE 			11
+#define USART_CR1_M 			12
+#define USART_CR1_UE 			13
+#define USART_CR1_OVER8 		15
+
+//defining CR2 macros
+#define USART_CR2_ADD 			0
+#define USART_CR2_LBDL 			5
+#define USART_CR2_LBDIE 		6
+#define USART_CR2_LBCL 			8
+#define USART_CR2_CPHA  		9
+#define USART_CR2_CPOL  		10
+#define USART_CR2_CLKEN 		11
+#define USART_CR2_STOP  		12
+#define USART_CR2_LINEN 		14
+
+//defining CR3 macros
+#define USART_CR3_EIE 			0
+#define USART_CR3_IREN 			1
+#define USART_CR3_IRLP 		    2
+#define USART_CR3_HDSEL 		3
+#define USART_CR3_NACK  		4
+#define USART_CR3_SCEN  		5
+#define USART_CR3_DMAR 			6
+#define USART_CR3_DMAT  		7
+#define USART_CR3_RTSE 			8
+#define USART_CR3_CTSE 			9
+#define USART_CR3_CTSIE  		10
+#define USART_CR3_ONEBIT 		11
+
+//defining macros for GTPR
+#define USART_GTPR_PSC 			0
+#define USART_GTPR_GT 			8
 
 
 #include "stm32f401xx_gpio_driver.h"
 #include "stm32f401xx_spi_driver.h"
 #include "stm32f401xx_i2c_driver.h"
+#include "stm32f401xx_usart_driver.h"
 
 
 #endif /* INC_STM32F401XX_H_ */
