@@ -125,6 +125,9 @@ void I2C_CloseRecieveData(I2C_Handle_t *pI2CHandle);
 uint8_t I2C_MasterSendDataIT(I2C_Handle_t *pI2CHandle, uint8_t *pTxBuffer, uint8_t Len, uint8_t SlaveAddr, uint8_t Sr);
 uint8_t I2C_MasterRecieveDataIT(I2C_Handle_t *pI2CHandle, uint8_t *pRxBuffer, uint8_t Len, uint8_t SlaveAddr, uint8_t Sr);
 
+uint32_t RCC_GetPCLK1Value(void);
+uint32_t RCC_GetPCLK2Value(void);
 
+uint8_t I2CGetFlagStatus(I2C_RegDef_t *pI2C, uint32_t FlagSet);
 
 #endif /* INC_STM32F401XX_I2C_DRIVER_H_ */
